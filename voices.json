@@ -1,0 +1,1620 @@
+{
+  "version": "1.0.0",
+  "totalVoices": 127,
+  "lastUpdated": "2024-01-15",
+  "engines": {
+    "coqui": {
+      "name": "Coqui TTS",
+      "license": "MPL-2.0",
+      "website": "https://github.com/coqui-ai/TTS"
+    },
+    "piper": {
+      "name": "Piper TTS",
+      "license": "MIT",
+      "website": "https://github.com/rhasspy/piper"
+    },
+    "mozilla": {
+      "name": "Mozilla TTS",
+      "license": "MPL-2.0",
+      "website": "https://github.com/mozilla/TTS"
+    },
+    "vits": {
+      "name": "VITS",
+      "license": "MIT",
+      "website": "https://github.com/jaywalnut310/vits"
+    },
+    "glowtts": {
+      "name": "Glow-TTS",
+      "license": "MIT",
+      "website": "https://github.com/jaywalnut310/glow-tts"
+    },
+    "fastpitch": {
+      "name": "FastPitch",
+      "license": "Apache-2.0",
+      "website": "https://github.com/NVIDIA/DeepLearningExamples"
+    },
+    "tacotron2": {
+      "name": "Tacotron2",
+      "license": "BSD-3-Clause",
+      "website": "https://github.com/NVIDIA/tacotron2"
+    },
+    "opentts": {
+      "name": "OpenTTS",
+      "license": "MIT",
+      "website": "https://github.com/synesthesiam/opentts"
+    },
+    "espeak": {
+      "name": "eSpeak NG",
+      "license": "GPL-3.0",
+      "website": "https://github.com/espeak-ng/espeak-ng"
+    },
+    "mimic3": {
+      "name": "Mimic 3",
+      "license": "AGPL-3.0",
+      "website": "https://github.com/MycroftAI/mimic3"
+    }
+  },
+  "languages": {
+    "en": { "name": "English", "flag": "🇬🇧" },
+    "en-US": { "name": "English (US)", "flag": "🇺🇸" },
+    "en-GB": { "name": "English (UK)", "flag": "🇬🇧" },
+    "en-AU": { "name": "English (AU)", "flag": "🇦🇺" },
+    "en-CA": { "name": "English (CA)", "flag": "🇨🇦" },
+    "ar": { "name": "Arabic", "flag": "🇸🇦" },
+    "ar-EG": { "name": "Arabic (Egypt)", "flag": "🇪🇬" },
+    "ar-SA": { "name": "Arabic (Gulf)", "flag": "🇸🇦" },
+    "ar-LB": { "name": "Arabic (Levant)", "flag": "🇱🇧" },
+    "fr": { "name": "French", "flag": "🇫🇷" },
+    "fr-CA": { "name": "French (CA)", "flag": "🇨🇦" },
+    "es": { "name": "Spanish", "flag": "🇪🇸" },
+    "es-MX": { "name": "Spanish (MX)", "flag": "🇲🇽" },
+    "es-AR": { "name": "Spanish (AR)", "flag": "🇦🇷" },
+    "de": { "name": "German", "flag": "🇩🇪" },
+    "it": { "name": "Italian", "flag": "🇮🇹" },
+    "pt": { "name": "Portuguese", "flag": "🇵🇹" },
+    "pt-BR": { "name": "Portuguese (BR)", "flag": "🇧🇷" },
+    "ru": { "name": "Russian", "flag": "🇷🇺" },
+    "zh": { "name": "Chinese", "flag": "🇨🇳" },
+    "zh-TW": { "name": "Chinese (TW)", "flag": "🇹🇼" },
+    "ja": { "name": "Japanese", "flag": "🇯🇵" },
+    "ko": { "name": "Korean", "flag": "🇰🇷" },
+    "tr": { "name": "Turkish", "flag": "🇹🇷" },
+    "hi": { "name": "Hindi", "flag": "🇮🇳" },
+    "id": { "name": "Indonesian", "flag": "🇮🇩" },
+    "vi": { "name": "Vietnamese", "flag": "🇻🇳" },
+    "nl": { "name": "Dutch", "flag": "🇳🇱" },
+    "pl": { "name": "Polish", "flag": "🇵🇱" },
+    "uk": { "name": "Ukrainian", "flag": "🇺🇦" },
+    "cs": { "name": "Czech", "flag": "🇨🇿" },
+    "el": { "name": "Greek", "flag": "🇬🇷" },
+    "sv": { "name": "Swedish", "flag": "🇸🇪" },
+    "da": { "name": "Danish", "flag": "🇩🇰" },
+    "fi": { "name": "Finnish", "flag": "🇫🇮" },
+    "no": { "name": "Norwegian", "flag": "🇳🇴" },
+    "hu": { "name": "Hungarian", "flag": "🇭🇺" },
+    "ro": { "name": "Romanian", "flag": "🇷🇴" },
+    "th": { "name": "Thai", "flag": "🇹🇭" },
+    "he": { "name": "Hebrew", "flag": "🇮🇱" },
+    "bn": { "name": "Bengali", "flag": "🇧🇩" },
+    "ta": { "name": "Tamil", "flag": "🇮🇳" },
+    "te": { "name": "Telugu", "flag": "🇮🇳" },
+    "mr": { "name": "Marathi", "flag": "🇮🇳" },
+    "gu": { "name": "Gujarati", "flag": "🇮🇳" },
+    "fa": { "name": "Persian", "flag": "🇮🇷" },
+    "sw": { "name": "Swahili", "flag": "🇰🇪" },
+    "ca": { "name": "Catalan", "flag": "🇪🇸" },
+    "eu": { "name": "Basque", "flag": "🇪🇸" },
+    "gl": { "name": "Galician", "flag": "🇪🇸" }
+  },
+  "voices": [
+    {
+      "id": "coqui_en_vits_ljspeech",
+      "name": "LJSpeech VITS",
+      "engine": "coqui",
+      "language": "en-US",
+      "gender": "female",
+      "model": "tts_models/en/ljspeech/vits",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_en_vits_vctk_p225",
+      "name": "VCTK p225",
+      "engine": "coqui",
+      "language": "en-GB",
+      "gender": "female",
+      "model": "tts_models/en/vctk/vits",
+      "speaker": "p225",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_en_vits_vctk_p226",
+      "name": "VCTK p226",
+      "engine": "coqui",
+      "language": "en-GB",
+      "gender": "male",
+      "model": "tts_models/en/vctk/vits",
+      "speaker": "p226",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_en_vits_vctk_p227",
+      "name": "VCTK p227",
+      "engine": "coqui",
+      "language": "en-GB",
+      "gender": "male",
+      "model": "tts_models/en/vctk/vits",
+      "speaker": "p227",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_en_vits_vctk_p228",
+      "name": "VCTK p228",
+      "engine": "coqui",
+      "language": "en-GB",
+      "gender": "female",
+      "model": "tts_models/en/vctk/vits",
+      "speaker": "p228",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_en_vits_vctk_p229",
+      "name": "VCTK p229",
+      "engine": "coqui",
+      "language": "en-GB",
+      "gender": "female",
+      "model": "tts_models/en/vctk/vits",
+      "speaker": "p229",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_en_vits_vctk_p230",
+      "name": "VCTK p230",
+      "engine": "coqui",
+      "language": "en-GB",
+      "gender": "female",
+      "model": "tts_models/en/vctk/vits",
+      "speaker": "p230",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_en_vits_vctk_p231",
+      "name": "VCTK p231",
+      "engine": "coqui",
+      "language": "en-GB",
+      "gender": "female",
+      "model": "tts_models/en/vctk/vits",
+      "speaker": "p231",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_en_vits_vctk_p232",
+      "name": "VCTK p232",
+      "engine": "coqui",
+      "language": "en-GB",
+      "gender": "male",
+      "model": "tts_models/en/vctk/vits",
+      "speaker": "p232",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_en_vits_vctk_p233",
+      "name": "VCTK p233",
+      "engine": "coqui",
+      "language": "en-GB",
+      "gender": "female",
+      "model": "tts_models/en/vctk/vits",
+      "speaker": "p233",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_en_tacotron2_ljspeech",
+      "name": "LJSpeech Tacotron2",
+      "engine": "coqui",
+      "language": "en-US",
+      "gender": "female",
+      "model": "tts_models/en/ljspeech/tacotron2-DDC",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_en_glowtts_ljspeech",
+      "name": "LJSpeech Glow-TTS",
+      "engine": "coqui",
+      "language": "en-US",
+      "gender": "female",
+      "model": "tts_models/en/ljspeech/glow-tts",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_en_fastpitch_ljspeech",
+      "name": "LJSpeech FastPitch",
+      "engine": "coqui",
+      "language": "en-US",
+      "gender": "female",
+      "model": "tts_models/en/ljspeech/fast_pitch",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_en_speedy_ljspeech",
+      "name": "LJSpeech Speedy",
+      "engine": "coqui",
+      "language": "en-US",
+      "gender": "female",
+      "model": "tts_models/en/ljspeech/speedy-speech",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_en_jenny",
+      "name": "Jenny (Dioco)",
+      "engine": "coqui",
+      "language": "en-US",
+      "gender": "female",
+      "model": "tts_models/en/jenny/jenny",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_en_sam",
+      "name": "Sam",
+      "engine": "coqui",
+      "language": "en-US",
+      "gender": "male",
+      "model": "tts_models/en/sam/tacotron-DDC",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_multilingual_xtts_v2",
+      "name": "XTTS v2 Multilingual",
+      "engine": "coqui",
+      "language": "en",
+      "gender": "neutral",
+      "model": "tts_models/multilingual/multi-dataset/xtts_v2",
+      "quality": "premium",
+      "sampleRate": 24000
+    },
+    {
+      "id": "coqui_en_blizzard2013",
+      "name": "Blizzard 2013",
+      "engine": "coqui",
+      "language": "en-US",
+      "gender": "female",
+      "model": "tts_models/en/blizzard2013/capacitron-t2-c50",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_en_us_amy_low",
+      "name": "Amy (Low)",
+      "engine": "piper",
+      "language": "en-US",
+      "gender": "female",
+      "model": "en_US-amy-low",
+      "quality": "low",
+      "sampleRate": 16000
+    },
+    {
+      "id": "piper_en_us_amy_medium",
+      "name": "Amy (Medium)",
+      "engine": "piper",
+      "language": "en-US",
+      "gender": "female",
+      "model": "en_US-amy-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_en_us_danny_low",
+      "name": "Danny (Low)",
+      "engine": "piper",
+      "language": "en-US",
+      "gender": "male",
+      "model": "en_US-danny-low",
+      "quality": "low",
+      "sampleRate": 16000
+    },
+    {
+      "id": "piper_en_us_kathleen_low",
+      "name": "Kathleen (Low)",
+      "engine": "piper",
+      "language": "en-US",
+      "gender": "female",
+      "model": "en_US-kathleen-low",
+      "quality": "low",
+      "sampleRate": 16000
+    },
+    {
+      "id": "piper_en_us_lessac_medium",
+      "name": "Lessac (Medium)",
+      "engine": "piper",
+      "language": "en-US",
+      "gender": "male",
+      "model": "en_US-lessac-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_en_us_lessac_high",
+      "name": "Lessac (High)",
+      "engine": "piper",
+      "language": "en-US",
+      "gender": "male",
+      "model": "en_US-lessac-high",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_en_us_libritts_high",
+      "name": "LibriTTS (High)",
+      "engine": "piper",
+      "language": "en-US",
+      "gender": "neutral",
+      "model": "en_US-libritts-high",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_en_us_ryan_medium",
+      "name": "Ryan (Medium)",
+      "engine": "piper",
+      "language": "en-US",
+      "gender": "male",
+      "model": "en_US-ryan-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_en_us_ryan_high",
+      "name": "Ryan (High)",
+      "engine": "piper",
+      "language": "en-US",
+      "gender": "male",
+      "model": "en_US-ryan-high",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_en_gb_alan_low",
+      "name": "Alan (UK)",
+      "engine": "piper",
+      "language": "en-GB",
+      "gender": "male",
+      "model": "en_GB-alan-low",
+      "quality": "low",
+      "sampleRate": 16000
+    },
+    {
+      "id": "piper_en_gb_alan_medium",
+      "name": "Alan (UK Medium)",
+      "engine": "piper",
+      "language": "en-GB",
+      "gender": "male",
+      "model": "en_GB-alan-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_en_gb_alba_medium",
+      "name": "Alba (UK)",
+      "engine": "piper",
+      "language": "en-GB",
+      "gender": "female",
+      "model": "en_GB-alba-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_en_gb_aru_medium",
+      "name": "Aru (UK)",
+      "engine": "piper",
+      "language": "en-GB",
+      "gender": "male",
+      "model": "en_GB-aru-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_en_gb_cori_medium",
+      "name": "Cori (UK)",
+      "engine": "piper",
+      "language": "en-GB",
+      "gender": "female",
+      "model": "en_GB-cori-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_en_gb_jenny_medium",
+      "name": "Jenny (UK)",
+      "engine": "piper",
+      "language": "en-GB",
+      "gender": "female",
+      "model": "en_GB-jenny_dioco-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_en_au_karen_medium",
+      "name": "Karen (AU)",
+      "engine": "piper",
+      "language": "en-AU",
+      "gender": "female",
+      "model": "en_AU-karen-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_ar_sa_hussein_medium",
+      "name": "Hussein",
+      "engine": "piper",
+      "language": "ar-SA",
+      "gender": "male",
+      "model": "ar_SA-hussein-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_ar_tacotron",
+      "name": "Arabic Tacotron",
+      "engine": "coqui",
+      "language": "ar",
+      "gender": "male",
+      "model": "tts_models/ar/cv/tacotron2",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_ar_eg_layla_medium",
+      "name": "Layla (Egypt)",
+      "engine": "piper",
+      "language": "ar-EG",
+      "gender": "female",
+      "model": "ar_EG-layla-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_ar_eg_omar_medium",
+      "name": "Omar (Egypt)",
+      "engine": "piper",
+      "language": "ar-EG",
+      "gender": "male",
+      "model": "ar_EG-omar-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_ar_lb_nour_medium",
+      "name": "Nour (Levant)",
+      "engine": "piper",
+      "language": "ar-LB",
+      "gender": "female",
+      "model": "ar_LB-nour-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_ar_lb_karim_medium",
+      "name": "Karim (Levant)",
+      "engine": "piper",
+      "language": "ar-LB",
+      "gender": "male",
+      "model": "ar_LB-karim-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_ar_sa_fahad_medium",
+      "name": "Fahad (Gulf)",
+      "engine": "piper",
+      "language": "ar-SA",
+      "gender": "male",
+      "model": "ar_SA-fahad-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_ar_sa_salma_medium",
+      "name": "Salma (Gulf)",
+      "engine": "piper",
+      "language": "ar-SA",
+      "gender": "female",
+      "model": "ar_SA-salma-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "mimic3_ar_male",
+      "name": "Arabic Male",
+      "engine": "mimic3",
+      "language": "ar",
+      "gender": "male",
+      "model": "ar_JO/cv/vits",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "mimic3_ar_female",
+      "name": "Arabic Female",
+      "engine": "mimic3",
+      "language": "ar",
+      "gender": "female",
+      "model": "ar_JO/cv/vits-female",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_fr_tacotron",
+      "name": "French Tacotron",
+      "engine": "coqui",
+      "language": "fr",
+      "gender": "male",
+      "model": "tts_models/fr/mai/tacotron2-DDC",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_fr_vits_css10",
+      "name": "French VITS CSS10",
+      "engine": "coqui",
+      "language": "fr",
+      "gender": "female",
+      "model": "tts_models/fr/css10/vits",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_fr_siwis_low",
+      "name": "Siwis (Low)",
+      "engine": "piper",
+      "language": "fr",
+      "gender": "female",
+      "model": "fr_FR-siwis-low",
+      "quality": "low",
+      "sampleRate": 16000
+    },
+    {
+      "id": "piper_fr_siwis_medium",
+      "name": "Siwis (Medium)",
+      "engine": "piper",
+      "language": "fr",
+      "gender": "female",
+      "model": "fr_FR-siwis-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_fr_upmc_medium",
+      "name": "UPMC Male",
+      "engine": "piper",
+      "language": "fr",
+      "gender": "male",
+      "model": "fr_FR-upmc-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_fr_gilles_low",
+      "name": "Gilles",
+      "engine": "piper",
+      "language": "fr",
+      "gender": "male",
+      "model": "fr_FR-gilles-low",
+      "quality": "low",
+      "sampleRate": 16000
+    },
+    {
+      "id": "mimic3_fr_tom",
+      "name": "Tom (FR)",
+      "engine": "mimic3",
+      "language": "fr",
+      "gender": "male",
+      "model": "fr_FR/tom/vits",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_fr_ca_guy_medium",
+      "name": "Guy (Canadian)",
+      "engine": "piper",
+      "language": "fr-CA",
+      "gender": "male",
+      "model": "fr_CA-guy-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_es_tacotron",
+      "name": "Spanish Tacotron",
+      "engine": "coqui",
+      "language": "es",
+      "gender": "male",
+      "model": "tts_models/es/mai/tacotron2-DDC",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_es_vits_css10",
+      "name": "Spanish VITS CSS10",
+      "engine": "coqui",
+      "language": "es",
+      "gender": "female",
+      "model": "tts_models/es/css10/vits",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_es_carlfm_medium",
+      "name": "CarlFM",
+      "engine": "piper",
+      "language": "es",
+      "gender": "male",
+      "model": "es_ES-carlfm-x_low",
+      "quality": "low",
+      "sampleRate": 16000
+    },
+    {
+      "id": "piper_es_davefx_medium",
+      "name": "DaveFX",
+      "engine": "piper",
+      "language": "es",
+      "gender": "male",
+      "model": "es_ES-davefx-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_es_mls_medium",
+      "name": "MLS Spanish",
+      "engine": "piper",
+      "language": "es",
+      "gender": "neutral",
+      "model": "es_ES-mls_10246-low",
+      "quality": "low",
+      "sampleRate": 16000
+    },
+    {
+      "id": "piper_es_sharvard_medium",
+      "name": "Sharvard",
+      "engine": "piper",
+      "language": "es",
+      "gender": "female",
+      "model": "es_ES-sharvard-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_es_mx_ald_medium",
+      "name": "Ald (Mexico)",
+      "engine": "piper",
+      "language": "es-MX",
+      "gender": "male",
+      "model": "es_MX-ald-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_es_mx_claude_high",
+      "name": "Claude (Mexico)",
+      "engine": "piper",
+      "language": "es-MX",
+      "gender": "male",
+      "model": "es_MX-claude-high",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_es_ar_paola_medium",
+      "name": "Paola (Argentina)",
+      "engine": "piper",
+      "language": "es-AR",
+      "gender": "female",
+      "model": "es_AR-paola-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "mimic3_es_m_ailabs",
+      "name": "M-AILabs Male",
+      "engine": "mimic3",
+      "language": "es",
+      "gender": "male",
+      "model": "es_ES/m-ailabs/vits",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_de_tacotron",
+      "name": "German Tacotron",
+      "engine": "coqui",
+      "language": "de",
+      "gender": "male",
+      "model": "tts_models/de/thorsten/tacotron2-DDC",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_de_vits_thorsten",
+      "name": "Thorsten VITS",
+      "engine": "coqui",
+      "language": "de",
+      "gender": "male",
+      "model": "tts_models/de/thorsten/vits",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_de_thorsten_low",
+      "name": "Thorsten (Low)",
+      "engine": "piper",
+      "language": "de",
+      "gender": "male",
+      "model": "de_DE-thorsten-low",
+      "quality": "low",
+      "sampleRate": 16000
+    },
+    {
+      "id": "piper_de_thorsten_medium",
+      "name": "Thorsten (Medium)",
+      "engine": "piper",
+      "language": "de",
+      "gender": "male",
+      "model": "de_DE-thorsten-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_de_thorsten_high",
+      "name": "Thorsten (High)",
+      "engine": "piper",
+      "language": "de",
+      "gender": "male",
+      "model": "de_DE-thorsten-high",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_de_kerstin_low",
+      "name": "Kerstin",
+      "engine": "piper",
+      "language": "de",
+      "gender": "female",
+      "model": "de_DE-kerstin-low",
+      "quality": "low",
+      "sampleRate": 16000
+    },
+    {
+      "id": "coqui_it_vits",
+      "name": "Italian VITS",
+      "engine": "coqui",
+      "language": "it",
+      "gender": "female",
+      "model": "tts_models/it/mai_female/vits",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_it_riccardo_medium",
+      "name": "Riccardo",
+      "engine": "piper",
+      "language": "it",
+      "gender": "male",
+      "model": "it_IT-riccardo-x_low",
+      "quality": "low",
+      "sampleRate": 16000
+    },
+    {
+      "id": "piper_it_paola_medium",
+      "name": "Paola (IT)",
+      "engine": "piper",
+      "language": "it",
+      "gender": "female",
+      "model": "it_IT-paola-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "mimic3_it_mls",
+      "name": "MLS Italian",
+      "engine": "mimic3",
+      "language": "it",
+      "gender": "neutral",
+      "model": "it_IT/mls/vits",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_it_lisa_medium",
+      "name": "Lisa (IT)",
+      "engine": "piper",
+      "language": "it",
+      "gender": "female",
+      "model": "it_IT-lisa-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_pt_br_tacotron",
+      "name": "Portuguese BR Tacotron",
+      "engine": "coqui",
+      "language": "pt-BR",
+      "gender": "male",
+      "model": "tts_models/pt/cv/tacotron2",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_pt_br_faber_medium",
+      "name": "Faber (BR)",
+      "engine": "piper",
+      "language": "pt-BR",
+      "gender": "male",
+      "model": "pt_BR-faber-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_pt_br_edresson_low",
+      "name": "Edresson (BR)",
+      "engine": "piper",
+      "language": "pt-BR",
+      "gender": "male",
+      "model": "pt_BR-edresson-low",
+      "quality": "low",
+      "sampleRate": 16000
+    },
+    {
+      "id": "piper_pt_pt_tugstugi_medium",
+      "name": "Tugstugi (PT)",
+      "engine": "piper",
+      "language": "pt",
+      "gender": "male",
+      "model": "pt_PT-tugão-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_pt_br_maria_medium",
+      "name": "Maria (BR)",
+      "engine": "piper",
+      "language": "pt-BR",
+      "gender": "female",
+      "model": "pt_BR-maria-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "mimic3_pt_br_mls",
+      "name": "MLS Portuguese BR",
+      "engine": "mimic3",
+      "language": "pt-BR",
+      "gender": "neutral",
+      "model": "pt_BR/mls/vits",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_pt_pt_ana_medium",
+      "name": "Ana (PT)",
+      "engine": "piper",
+      "language": "pt",
+      "gender": "female",
+      "model": "pt_PT-ana-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_pt_pt_joao_medium",
+      "name": "João (PT)",
+      "engine": "piper",
+      "language": "pt",
+      "gender": "male",
+      "model": "pt_PT-joao-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_ru_vits",
+      "name": "Russian VITS",
+      "engine": "coqui",
+      "language": "ru",
+      "gender": "female",
+      "model": "tts_models/ru/cv/vits",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_ru_dmitri_medium",
+      "name": "Dmitri",
+      "engine": "piper",
+      "language": "ru",
+      "gender": "male",
+      "model": "ru_RU-dmitri-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_ru_irina_medium",
+      "name": "Irina",
+      "engine": "piper",
+      "language": "ru",
+      "gender": "female",
+      "model": "ru_RU-irina-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_ru_ruslan_medium",
+      "name": "Ruslan",
+      "engine": "piper",
+      "language": "ru",
+      "gender": "male",
+      "model": "ru_RU-ruslan-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "mimic3_ru_multi",
+      "name": "Russian Multi",
+      "engine": "mimic3",
+      "language": "ru",
+      "gender": "neutral",
+      "model": "ru_RU/multi/vits",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_ru_natasha_medium",
+      "name": "Natasha",
+      "engine": "piper",
+      "language": "ru",
+      "gender": "female",
+      "model": "ru_RU-natasha-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_zh_tacotron",
+      "name": "Chinese Tacotron",
+      "engine": "coqui",
+      "language": "zh",
+      "gender": "female",
+      "model": "tts_models/zh-CN/baker/tacotron2-DDC-GST",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_zh_huayan_medium",
+      "name": "Huayan",
+      "engine": "piper",
+      "language": "zh",
+      "gender": "female",
+      "model": "zh_CN-huayan-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_zh_xiaoming_medium",
+      "name": "Xiaoming",
+      "engine": "piper",
+      "language": "zh",
+      "gender": "male",
+      "model": "zh_CN-xiaoming-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "mimic3_zh_baker",
+      "name": "Baker (ZH)",
+      "engine": "mimic3",
+      "language": "zh",
+      "gender": "female",
+      "model": "zh_CN/baker/vits",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_zh_tw_liliang_medium",
+      "name": "Liliang (TW)",
+      "engine": "piper",
+      "language": "zh-TW",
+      "gender": "male",
+      "model": "zh_TW-liliang-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_ja_tacotron",
+      "name": "Japanese Tacotron",
+      "engine": "coqui",
+      "language": "ja",
+      "gender": "female",
+      "model": "tts_models/ja/kokoro/tacotron2-DDC",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_ja_kokoro_medium",
+      "name": "Kokoro",
+      "engine": "piper",
+      "language": "ja",
+      "gender": "female",
+      "model": "ja_JP-kokoro-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_ja_takumi_medium",
+      "name": "Takumi",
+      "engine": "piper",
+      "language": "ja",
+      "gender": "male",
+      "model": "ja_JP-takumi-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "vits_ja_jsut",
+      "name": "JSUT Female",
+      "engine": "vits",
+      "language": "ja",
+      "gender": "female",
+      "model": "vits-ja-jsut",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_ja_yuki_medium",
+      "name": "Yuki",
+      "engine": "piper",
+      "language": "ja",
+      "gender": "female",
+      "model": "ja_JP-yuki-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_ko_siwoo_medium",
+      "name": "Siwoo",
+      "engine": "piper",
+      "language": "ko",
+      "gender": "male",
+      "model": "ko_KR-siwoo-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "vits_ko_kss",
+      "name": "KSS Female",
+      "engine": "vits",
+      "language": "ko",
+      "gender": "female",
+      "model": "vits-ko-kss",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_ko_minjung_medium",
+      "name": "Minjung",
+      "engine": "piper",
+      "language": "ko",
+      "gender": "female",
+      "model": "ko_KR-minjung-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "mimic3_ko_kss",
+      "name": "Korean KSS",
+      "engine": "mimic3",
+      "language": "ko",
+      "gender": "female",
+      "model": "ko_KR/kss/vits",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_tr_tacotron",
+      "name": "Turkish Tacotron",
+      "engine": "coqui",
+      "language": "tr",
+      "gender": "male",
+      "model": "tts_models/tr/common-voice/tacotron2",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_tr_dfki_medium",
+      "name": "DFKI Turkish",
+      "engine": "piper",
+      "language": "tr",
+      "gender": "male",
+      "model": "tr_TR-dfki-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_tr_fettah_medium",
+      "name": "Fettah",
+      "engine": "piper",
+      "language": "tr",
+      "gender": "male",
+      "model": "tr_TR-fettah-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_tr_ayse_medium",
+      "name": "Ayşe",
+      "engine": "piper",
+      "language": "tr",
+      "gender": "female",
+      "model": "tr_TR-ayse-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_hi_divya_medium",
+      "name": "Divya",
+      "engine": "piper",
+      "language": "hi",
+      "gender": "female",
+      "model": "hi_IN-divya-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_hi_swara_medium",
+      "name": "Swara",
+      "engine": "piper",
+      "language": "hi",
+      "gender": "female",
+      "model": "hi_IN-swara-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_hi_arjun_medium",
+      "name": "Arjun",
+      "engine": "piper",
+      "language": "hi",
+      "gender": "male",
+      "model": "hi_IN-arjun-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "mimic3_hi_cv",
+      "name": "Hindi CV",
+      "engine": "mimic3",
+      "language": "hi",
+      "gender": "neutral",
+      "model": "hi_IN/cv/vits",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_hi_kavya_medium",
+      "name": "Kavya",
+      "engine": "piper",
+      "language": "hi",
+      "gender": "female",
+      "model": "hi_IN-kavya-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_hi_raj_medium",
+      "name": "Raj",
+      "engine": "piper",
+      "language": "hi",
+      "gender": "male",
+      "model": "hi_IN-raj-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_id_rusdi_medium",
+      "name": "Rusdi",
+      "engine": "piper",
+      "language": "id",
+      "gender": "male",
+      "model": "id_ID-rusdi-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_id_siti_medium",
+      "name": "Siti",
+      "engine": "piper",
+      "language": "id",
+      "gender": "female",
+      "model": "id_ID-siti-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "mimic3_id_cv",
+      "name": "Indonesian CV",
+      "engine": "mimic3",
+      "language": "id",
+      "gender": "neutral",
+      "model": "id_ID/cv/vits",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_id_dewi_medium",
+      "name": "Dewi",
+      "engine": "piper",
+      "language": "id",
+      "gender": "female",
+      "model": "id_ID-dewi-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_vi_vivos_medium",
+      "name": "VIVOS Vietnamese",
+      "engine": "piper",
+      "language": "vi",
+      "gender": "female",
+      "model": "vi_VN-vivos-x_low",
+      "quality": "low",
+      "sampleRate": 16000
+    },
+    {
+      "id": "piper_vi_huong_medium",
+      "name": "Hương",
+      "engine": "piper",
+      "language": "vi",
+      "gender": "female",
+      "model": "vi_VN-huong-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_vi_minh_medium",
+      "name": "Minh",
+      "engine": "piper",
+      "language": "vi",
+      "gender": "male",
+      "model": "vi_VN-minh-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "mimic3_vi_vivos",
+      "name": "Vietnamese VIVOS",
+      "engine": "mimic3",
+      "language": "vi",
+      "gender": "female",
+      "model": "vi_VN/vivos/vits",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_nl_nathalie_medium",
+      "name": "Nathalie",
+      "engine": "piper",
+      "language": "nl",
+      "gender": "female",
+      "model": "nl_NL-nathalie-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_nl_rdh_medium",
+      "name": "RDH Dutch",
+      "engine": "piper",
+      "language": "nl",
+      "gender": "male",
+      "model": "nl_NL-rdh-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_nl_tacotron",
+      "name": "Dutch Tacotron",
+      "engine": "coqui",
+      "language": "nl",
+      "gender": "female",
+      "model": "tts_models/nl/mai/tacotron2-DDC",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_pl_gosia_medium",
+      "name": "Gosia",
+      "engine": "piper",
+      "language": "pl",
+      "gender": "female",
+      "model": "pl_PL-gosia-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_pl_darkman_medium",
+      "name": "Darkman",
+      "engine": "piper",
+      "language": "pl",
+      "gender": "male",
+      "model": "pl_PL-darkman-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_pl_tacotron",
+      "name": "Polish Tacotron",
+      "engine": "coqui",
+      "language": "pl",
+      "gender": "female",
+      "model": "tts_models/pl/mai_female/vits",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_uk_lada_medium",
+      "name": "Lada",
+      "engine": "piper",
+      "language": "uk",
+      "gender": "female",
+      "model": "uk_UA-lada-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_uk_tacotron",
+      "name": "Ukrainian Tacotron",
+      "engine": "coqui",
+      "language": "uk",
+      "gender": "male",
+      "model": "tts_models/uk/mai/tacotron2-DDC",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_cs_jirka_medium",
+      "name": "Jirka",
+      "engine": "piper",
+      "language": "cs",
+      "gender": "male",
+      "model": "cs_CZ-jirka-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_el_rapunzelina_low",
+      "name": "Rapunzelina",
+      "engine": "piper",
+      "language": "el",
+      "gender": "female",
+      "model": "el_GR-rapunzelina-low",
+      "quality": "low",
+      "sampleRate": 16000
+    },
+    {
+      "id": "coqui_el_tacotron",
+      "name": "Greek Tacotron",
+      "engine": "coqui",
+      "language": "el",
+      "gender": "female",
+      "model": "tts_models/el/cv/tacotron2",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_sv_nst_medium",
+      "name": "NST Swedish",
+      "engine": "piper",
+      "language": "sv",
+      "gender": "male",
+      "model": "sv_SE-nst-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_da_talesyntese_medium",
+      "name": "Talesyntese",
+      "engine": "piper",
+      "language": "da",
+      "gender": "male",
+      "model": "da_DK-talesyntese-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_fi_harri_low",
+      "name": "Harri",
+      "engine": "piper",
+      "language": "fi",
+      "gender": "male",
+      "model": "fi_FI-harri-low",
+      "quality": "low",
+      "sampleRate": 16000
+    },
+    {
+      "id": "coqui_fi_tacotron",
+      "name": "Finnish Tacotron",
+      "engine": "coqui",
+      "language": "fi",
+      "gender": "female",
+      "model": "tts_models/fi/css10/vits",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_no_talesyntese_medium",
+      "name": "Norwegian TTS",
+      "engine": "piper",
+      "language": "no",
+      "gender": "male",
+      "model": "no_NO-talesyntese-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_hu_tacotron",
+      "name": "Hungarian Tacotron",
+      "engine": "coqui",
+      "language": "hu",
+      "gender": "female",
+      "model": "tts_models/hu/css10/vits",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_ro_mihai_medium",
+      "name": "Mihai",
+      "engine": "piper",
+      "language": "ro",
+      "gender": "male",
+      "model": "ro_RO-mihai-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_th_female_medium",
+      "name": "Thai Female",
+      "engine": "piper",
+      "language": "th",
+      "gender": "female",
+      "model": "th_TH-female-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_he_shavit_medium",
+      "name": "Shavit",
+      "engine": "piper",
+      "language": "he",
+      "gender": "male",
+      "model": "he_IL-shavit-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_bn_tacotron",
+      "name": "Bengali Tacotron",
+      "engine": "coqui",
+      "language": "bn",
+      "gender": "female",
+      "model": "tts_models/bn/cv/tacotron2",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_ta_female_medium",
+      "name": "Tamil Female",
+      "engine": "piper",
+      "language": "ta",
+      "gender": "female",
+      "model": "ta_IN-female-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_te_female_medium",
+      "name": "Telugu Female",
+      "engine": "piper",
+      "language": "te",
+      "gender": "female",
+      "model": "te_IN-female-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_mr_female_medium",
+      "name": "Marathi Female",
+      "engine": "piper",
+      "language": "mr",
+      "gender": "female",
+      "model": "mr_IN-female-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_gu_female_medium",
+      "name": "Gujarati Female",
+      "engine": "piper",
+      "language": "gu",
+      "gender": "female",
+      "model": "gu_IN-female-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_fa_tacotron",
+      "name": "Persian Tacotron",
+      "engine": "coqui",
+      "language": "fa",
+      "gender": "male",
+      "model": "tts_models/fa/cv/tacotron2",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "espeak_sw_male",
+      "name": "Swahili Male",
+      "engine": "espeak",
+      "language": "sw",
+      "gender": "male",
+      "model": "sw",
+      "quality": "low",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_ca_tacotron",
+      "name": "Catalan Tacotron",
+      "engine": "coqui",
+      "language": "ca",
+      "gender": "female",
+      "model": "tts_models/ca/custom/vits",
+      "quality": "high",
+      "sampleRate": 22050
+    },
+    {
+      "id": "piper_ca_upc_medium",
+      "name": "UPC Catalan",
+      "engine": "piper",
+      "language": "ca",
+      "gender": "female",
+      "model": "ca_ES-upc-medium",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_eu_tacotron",
+      "name": "Basque Tacotron",
+      "engine": "coqui",
+      "language": "eu",
+      "gender": "female",
+      "model": "tts_models/eu/cv/tacotron2",
+      "quality": "medium",
+      "sampleRate": 22050
+    },
+    {
+      "id": "coqui_gl_tacotron",
+      "name": "Galician Tacotron",
+      "engine": "coqui",
+      "language": "gl",
+      "gender": "female",
+      "model": "tts_models/gl/cv/tacotron2",
+      "quality": "medium",
+      "sampleRate": 22050
+    }
+  ]
+}
