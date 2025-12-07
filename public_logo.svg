@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120">
+  <defs>
+    <!-- Chelsea Blue Gradient -->
+    <linearGradient id="chelseaBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#034694"/>
+      <stop offset="100%" style="stop-color:#001489"/>
+    </linearGradient>
+    
+    <!-- Gold Gradient -->
+    <linearGradient id="chelseaGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#DBA111"/>
+      <stop offset="100%" style="stop-color:#F4C430"/>
+    </linearGradient>
+    
+    <!-- Gold Shine Effect -->
+    <linearGradient id="goldShine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#DBA111"/>
+      <stop offset="50%" style="stop-color:#F4C430"/>
+      <stop offset="100%" style="stop-color:#DBA111"/>
+    </linearGradient>
+    
+    <!-- Shadow Filter -->
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="#001489" flood-opacity="0.3"/>
+    </filter>
+    
+    <!-- Glow Effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background Circle with Chelsea Blue -->
+  <circle cx="55" cy="60" r="50" fill="url(#chelseaBlue)" filter="url(#shadow)"/>
+  
+  <!-- Gold Ring -->
+  <circle cx="55" cy="60" r="46" fill="none" stroke="url(#chelseaGold)" stroke-width="3"/>
+  
+  <!-- Inner Circle -->
+  <circle cx="55" cy="60" r="40" fill="#001489"/>
+  
+  <!-- Microphone Icon -->
+  <g transform="translate(55, 60)">
+    <!-- Microphone Body -->
+    <rect x="-10" y="-25" width="20" height="32" rx="10" fill="url(#chelseaGold)" filter="url(#glow)"/>
+    
+    <!-- Microphone Grille Lines -->
+    <line x1="-6" y1="-18" x2="6" y2="-18" stroke="#034694" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="-6" y1="-13" x2="6" y2="-13" stroke="#034694" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="-6" y1="-8" x2="6" y2="-8" stroke="#034694" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="-6" y1="-3" x2="6" y2="-3" stroke="#034694" stroke-width="1.5" stroke-linecap="round"/>
+    
+    <!-- Microphone Stand Arc -->
+    <path d="M -16 5 Q -16 20, 0 20 Q 16 20, 16 5" fill="none" stroke="url(#chelseaGold)" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- Microphone Stand -->
+    <line x1="0" y1="20" x2="0" y2="30" stroke="url(#chelseaGold)" stroke-width="3" stroke-linecap="round"/>
+    <line x1="-10" y1="30" x2="10" y2="30" stroke="url(#chelseaGold)" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Sound Waves -->
+  <g stroke="url(#goldShine)" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.9">
+    <path d="M 85 45 Q 92 60, 85 75">
+      <animate attributeName="opacity" values="0.9;0.4;0.9" dur="1.5s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 95 35 Q 107 60, 95 85">
+      <animate attributeName="opacity" values="0.7;0.3;0.7" dur="1.5s" repeatCount="indefinite" begin="0.2s"/>
+    </path>
+    <path d="M 105 28 Q 120 60, 105 92">
+      <animate attributeName="opacity" values="0.5;0.2;0.5" dur="1.5s" repeatCount="indefinite" begin="0.4s"/>
+    </path>
+  </g>
+  
+  <!-- MySpeech Text -->
+  <g transform="translate(135, 60)">
+    <!-- My -->
+    <text x="0" y="8" font-family="Arial Black, sans-serif" font-size="42" font-weight="900" fill="url(#chelseaBlue)" filter="url(#shadow)">
+      My
+    </text>
+    <!-- Speech -->
+    <text x="62" y="8" font-family="Arial Black, sans-serif" font-size="42" font-weight="900" fill="url(#chelseaGold)" filter="url(#shadow)">
+      Speech
+    </text>
+  </g>
+  
+  <!-- Tagline -->
+  <text x="135" y="85" font-family="Arial, sans-serif" font-size="12" font-weight="500" fill="#034694" letter-spacing="2">
+    AI VOICE SYNTHESIS
+  </text>
+  
+  <!-- Small decorative line -->
+  <rect x="135" y="92" width="60" height="2" rx="1" fill="url(#chelseaGold)"/>
+  
+</svg>
