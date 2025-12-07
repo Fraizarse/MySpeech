@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySpeech Admin - Voice Management Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --chelsea-blue: #034694;
+            --chelsea-dark: #001489;
+            --chelsea-gold: #DBA111;
+            --chelsea-gold-light: #F4C430;
+            --chelsea-white: #FFFFFF;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .chelsea-header {
+            background: linear-gradient(135deg, var(--chelsea-blue) 0%, var(--chelsea-dark) 100%);
+        }
+        
+        .chelsea-btn-gold {
+            background: linear-gradient(135deg, var(--chelsea-gold) 0%, var(--chelsea-gold-light) 100%);
+            box-shadow: 0 4px 15px rgba(219, 161, 17, 0.5), inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .chelsea-btn-gold:hover {
+            background: linear-gradient(135deg, var(--chelsea-gold-light) 0%, var(--chelsea-gold) 100%);
+            box-shadow: 0 6px 25px rgba(219, 161, 17, 0.6), inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px) scale(1.01);
+        }
+        
+        .chelsea-btn-gold:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(219, 161, 17, 0.4);
+        }
+        
+        .chelsea-btn-blue {
+            background: linear-gradient(135deg, var(--chelsea-blue) 0%, var(--chelsea-dark) 100%);
+            box-shadow: 0 4px 15px rgba(3, 70, 148, 0.5), inset 0 2px 0 rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(219, 161, 17, 0.3);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .chelsea-btn-blue:hover {
+            background: linear-gradient(135deg, var(--chelsea-dark) 0%, var(--chelsea-blue) 100%);
+            box-shadow: 0 6px 25px rgba(3, 70, 148, 0.6), inset 0 2px 0 rgba(255, 255, 255, 0.15);
+            border-color: var(--chelsea-gold);
+            transform: translateY(-2px) scale(1.01);
+        }
+        
+        .chelsea-btn-blue:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(3, 70, 148, 0.4);
+        }
+        
+        /* Gold shimmer animation on header */
+        @keyframes goldShimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        .chelsea-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #034694, #DBA111, #F4C430, #DBA111, #034694);
+            background-size: 200% 100%;
+            animation: goldShimmer 3s linear infinite;
+        }
+        
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: var(--chelsea-gold);
+        }
+        
+        .toggle-checkbox:checked + .toggle-label {
+            background-color: var(--chelsea-gold);
+        }
+        
+        .toggle-checkbox {
+            right: 1.25rem;
+            transition: all 0.3s;
+        }
+        
+        .toggle-label {
+            transition: all 0.3s;
+        }
+        
+        .loading-spinner {
+            border: 3px solid rgba(3, 70, 148, 0.2);
+            border-top-color: var(--chelsea-gold);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Custom scrollbar */
+        .voice-table-container::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        .voice-table-container::-webkit-scrollbar-track {
+            background: rgba(3, 70, 148, 0.1);
+            border-radius: 4px;
+        }
+        
+        .voice-table-container::-webkit-scrollbar-thumb {
+            background: var(--chelsea-blue);
+            border-radius: 4px;
+        }
+        
+        /* Mobile responsive table */
+        @media (max-width: 768px) {
+            .voice-table thead {
+                display: none;
+            }
+            
+            .voice-table tr {
+                display: block;
+                margin-bottom: 1rem;
+                border: 1px solid rgba(3, 70, 148, 0.2);
+                border-radius: 0.75rem;
+                padding: 1rem;
+                background: white;
+            }
+            
+            .voice-table td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.5rem 0;
+                border: none !important;
+            }
+            
+            .voice-table td::before {
+                content: attr(data-label);
+                font-weight: 600;
+                color: var(--chelsea-blue);
+                margin-right: 1rem;
+            }
+        }
+        
+        /* Modal styles */
+        .modal-overlay {
+            background: rgba(0, 20, 137, 0.5);
+            backdrop-filter: blur(4px);
+        }
+        
+        .modal-content {
+            animation: modalSlide 0.3s ease-out;
+        }
+        
+        @keyframes modalSlide {
+            from { 
+                opacity: 0;
+                transform: translateY(-20px) scale(0.95);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-100 to-blue-50 min-h-screen">
+    <!-- Header -->
+    <header class="chelsea-header backdrop-blur-md border-b border-[#001489] sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <a href="/" class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-[#001489] to-[#034694] rounded-xl flex items-center justify-center shadow-lg border-2 border-[#DBA111]">
+                            <svg class="w-6 h-6 text-[#DBA111]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-bold text-white">MySpeech</h1>
+                            <p class="text-xs text-[#DBA111]">Admin Dashboard</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="/" class="text-white/80 hover:text-white transition-colors text-sm flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        </svg>
+                        Back to App
+                    </a>
+                    <div class="hidden sm:flex items-center gap-2">
+                        <span id="voiceStats" class="px-3 py-1 bg-[#DBA111]/20 rounded-full text-[#DBA111] text-sm font-medium">
+                            Loading...
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Page Title & Actions -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+            <div>
+                <h2 class="text-2xl md:text-3xl font-bold text-[#034694]">Voice Management</h2>
+                <p class="text-[#001489]/70">Manage your 127+ open-source TTS voices</p>
+            </div>
+            <button 
+                id="addVoiceBtn"
+                class="chelsea-btn-gold text-[#034694] font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center gap-2"
+            >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+                Add New Voice
+            </button>
+        </div>
+
+        <!-- Filters & Search Card -->
+        <div class="bg-white rounded-2xl shadow-sm border border-[#034694]/20 p-4 md:p-6 mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                <!-- Search -->
+                <div class="lg:col-span-2 relative">
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        placeholder="Search voices by name, ID..."
+                        class="w-full pl-10 pr-4 py-3 border border-[#034694]/20 rounded-xl focus:ring-2 focus:ring-[#034694] focus:border-transparent outline-none transition-all"
+                    >
+                </div>
+                
+                <!-- Language Filter -->
+                <select id="languageFilter" class="px-4 py-3 border border-[#034694]/20 rounded-xl focus:ring-2 focus:ring-[#034694] outline-none">
+                    <option value="">🌍 All Languages</option>
+                </select>
+                
+                <!-- Engine Filter -->
+                <select id="engineFilter" class="px-4 py-3 border border-[#034694]/20 rounded-xl focus:ring-2 focus:ring-[#034694] outline-none">
+                    <option value="">⚙️ All Engines</option>
+                </select>
+                
+                <!-- Status Filter -->
+                <select id="statusFilter" class="px-4 py-3 border border-[#034694]/20 rounded-xl focus:ring-2 focus:ring-[#034694] outline-none">
+                    <option value="">📊 All Status</option>
+                    <option value="enabled">✅ Enabled</option>
+                    <option value="disabled">❌ Disabled</option>
+                </select>
+            </div>
+            
+            <!-- Quick Stats -->
+            <div class="flex flex-wrap gap-4 mt-4 pt-4 border-t border-[#034694]/10">
+                <div class="flex items-center gap-2 text-sm">
+                    <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                    <span id="enabledCount" class="text-gray-600">0 Enabled</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm">
+                    <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                    <span id="disabledCount" class="text-gray-600">0 Disabled</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm">
+                    <span class="w-3 h-3 rounded-full bg-[#034694]"></span>
+                    <span id="totalCount" class="text-gray-600">0 Total</span>
+                </div>
+                <button id="bulkEnableBtn" class="ml-auto text-sm text-[#034694] hover:text-[#001489] font-medium">
+                    Enable All
+                </button>
+                <button id="bulkDisableBtn" class="text-sm text-red-500 hover:text-red-700 font-medium">
+                    Disable All
+                </button>
+            </div>
+        </div>
+
+        <!-- Voice Table -->
+        <div class="bg-white rounded-2xl shadow-sm border border-[#034694]/20 overflow-hidden">
+            <div class="voice-table-container overflow-x-auto max-h-[600px] overflow-y-auto">
+                <table class="voice-table w-full">
+                    <thead class="bg-[#034694]/5 sticky top-0">
+                        <tr>
+                            <th class="text-left px-6 py-4 text-sm font-semibold text-[#034694]">Voice</th>
+                            <th class="text-left px-6 py-4 text-sm font-semibold text-[#034694]">Language</th>
+                            <th class="text-left px-6 py-4 text-sm font-semibold text-[#034694]">Engine</th>
+                            <th class="text-left px-6 py-4 text-sm font-semibold text-[#034694]">Gender</th>
+                            <th class="text-left px-6 py-4 text-sm font-semibold text-[#034694]">Quality</th>
+                            <th class="text-center px-6 py-4 text-sm font-semibold text-[#034694]">Preview</th>
+                            <th class="text-center px-6 py-4 text-sm font-semibold text-[#034694]">Status</th>
+                            <th class="text-center px-6 py-4 text-sm font-semibold text-[#034694]">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="voiceTableBody" class="divide-y divide-[#034694]/10">
+                        <!-- Voices will be loaded dynamically -->
+                        <tr>
+                            <td colspan="8" class="px-6 py-12 text-center">
+                                <div class="loading-spinner mx-auto mb-3"></div>
+                                <p class="text-gray-400">Loading voices...</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Pagination -->
+        <div class="flex items-center justify-between mt-6">
+            <p id="paginationInfo" class="text-sm text-gray-500">Showing 1-25 of 127 voices</p>
+            <div class="flex items-center gap-2">
+                <button id="prevPageBtn" class="px-4 py-2 border border-[#034694]/20 rounded-lg text-[#034694] hover:bg-[#034694]/5 disabled:opacity-50 disabled:cursor-not-allowed">
+                    Previous
+                </button>
+                <div id="pageNumbers" class="flex items-center gap-1">
+                    <!-- Page numbers will be generated -->
+                </div>
+                <button id="nextPageBtn" class="px-4 py-2 border border-[#034694]/20 rounded-lg text-[#034694] hover:bg-[#034694]/5 disabled:opacity-50 disabled:cursor-not-allowed">
+                    Next
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add/Edit Voice Modal -->
+    <div id="voiceModal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-overlay absolute inset-0" onclick="closeModal()"></div>
+        <div class="modal-content absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-lg bg-white rounded-2xl shadow-2xl p-6 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-6">
+                <h3 id="modalTitle" class="text-xl font-bold text-[#034694]">Add New Voice</h3>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <form id="voiceForm" class="space-y-4">
+                <input type="hidden" id="voiceEditId">
+                
+                <!-- Voice ID -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Voice ID *</label>
+                    <input 
+                        type="text" 
+                        id="voiceId" 
+                        required
+                        placeholder="e.g., coqui_en_custom_01"
+                        class="w-full px-4 py-3 border border-[#034694]/20 rounded-xl focus:ring-2 focus:ring-[#034694] outline-none"
+                    >
+                    <p class="text-xs text-gray-500 mt-1">Unique identifier (lowercase, underscores)</p>
+                </div>
+                
+                <!-- Voice Name -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Display Name *</label>
+                    <input 
+                        type="text" 
+                        id="voiceName" 
+                        required
+                        placeholder="e.g., Custom English Voice"
+                        class="w-full px-4 py-3 border border-[#034694]/20 rounded-xl focus:ring-2 focus:ring-[#034694] outline-none"
+                    >
+                </div>
+                
+                <!-- Engine -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">TTS Engine *</label>
+                    <select id="voiceEngine" required class="w-full px-4 py-3 border border-[#034694]/20 rounded-xl focus:ring-2 focus:ring-[#034694] outline-none">
+                        <option value="">Select engine...</option>
+                        <option value="coqui">Coqui TTS</option>
+                        <option value="piper">Piper TTS</option>
+                        <option value="vits">VITS</option>
+                        <option value="mimic3">Mimic 3</option>
+                        <option value="glowtts">Glow-TTS</option>
+                        <option value="tacotron2">Tacotron2</option>
+                        <option value="fastpitch">FastPitch</option>
+                        <option value="mozilla">Mozilla TTS</option>
+                        <option value="espeak">eSpeak NG</option>
+                        <option value="opentts">OpenTTS</option>
+                    </select>
+                </div>
+                
+                <!-- Language -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Language *</label>
+                    <select id="voiceLanguage" required class="w-full px-4 py-3 border border-[#034694]/20 rounded-xl focus:ring-2 focus:ring-[#034694] outline-none">
+                        <option value="">Select language...</option>
+                        <option value="en-US">🇺🇸 English (US)</option>
+                        <option value="en-GB">🇬🇧 English (UK)</option>
+                        <option value="en-AU">🇦🇺 English (AU)</option>
+                        <option value="ar">🇸🇦 Arabic</option>
+                        <option value="ar-EG">🇪🇬 Arabic (Egypt)</option>
+                        <option value="ar-SA">🇸🇦 Arabic (Gulf)</option>
+                        <option value="fr">🇫🇷 French</option>
+                        <option value="es">🇪🇸 Spanish</option>
+                        <option value="es-MX">🇲🇽 Spanish (Mexico)</option>
+                        <option value="de">🇩🇪 German</option>
+                        <option value="it">🇮🇹 Italian</option>
+                        <option value="pt-BR">🇧🇷 Portuguese (BR)</option>
+                        <option value="ru">🇷🇺 Russian</option>
+                        <option value="zh">🇨🇳 Chinese</option>
+                        <option value="ja">🇯🇵 Japanese</option>
+                        <option value="ko">🇰🇷 Korean</option>
+                        <option value="hi">🇮🇳 Hindi</option>
+                        <option value="tr">🇹🇷 Turkish</option>
+                        <option value="nl">🇳🇱 Dutch</option>
+                        <option value="pl">🇵🇱 Polish</option>
+                        <option value="vi">🇻🇳 Vietnamese</option>
+                        <option value="id">🇮🇩 Indonesian</option>
+                        <option value="th">🇹🇭 Thai</option>
+                    </select>
+                </div>
+                
+                <!-- Gender -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Gender *</label>
+                    <div class="flex gap-4">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="voiceGender" value="female" class="accent-[#034694]">
+                            <span>♀️ Female</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="voiceGender" value="male" class="accent-[#034694]">
+                            <span>♂️ Male</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="voiceGender" value="neutral" class="accent-[#034694]">
+                            <span>⚪ Neutral</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Model Path -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Model Path *</label>
+                    <input 
+                        type="text" 
+                        id="voiceModel" 
+                        required
+                        placeholder="e.g., tts_models/en/custom/vits"
+                        class="w-full px-4 py-3 border border-[#034694]/20 rounded-xl focus:ring-2 focus:ring-[#034694] outline-none"
+                    >
+                    <p class="text-xs text-gray-500 mt-1">Path to the model or model identifier</p>
+                </div>
+                
+                <!-- Quality -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Quality</label>
+                    <select id="voiceQuality" class="w-full px-4 py-3 border border-[#034694]/20 rounded-xl focus:ring-2 focus:ring-[#034694] outline-none">
+                        <option value="low">Low (16kHz)</option>
+                        <option value="medium" selected>Medium (22kHz)</option>
+                        <option value="high">High (24kHz)</option>
+                        <option value="premium">Premium (48kHz)</option>
+                    </select>
+                </div>
+                
+                <!-- Sample Rate -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Sample Rate</label>
+                    <input 
+                        type="number" 
+                        id="voiceSampleRate" 
+                        value="22050"
+                        placeholder="22050"
+                        class="w-full px-4 py-3 border border-[#034694]/20 rounded-xl focus:ring-2 focus:ring-[#034694] outline-none"
+                    >
+                </div>
+                
+                <!-- Enabled Toggle -->
+                <div class="flex items-center justify-between py-2">
+                    <label class="text-sm font-medium text-gray-700">Enable Voice</label>
+                    <div class="relative inline-block w-12 align-middle select-none">
+                        <input type="checkbox" id="voiceEnabled" checked class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 border-gray-300 appearance-none cursor-pointer transition-all">
+                        <label class="toggle-label block overflow-hidden h-6 rounded-full bg-gray-300 cursor-pointer"></label>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="flex gap-3 pt-4">
+                    <button 
+                        type="button" 
+                        onclick="closeModal()" 
+                        class="flex-1 px-6 py-3 border border-[#034694]/20 text-[#034694] font-semibold rounded-xl hover:bg-[#034694]/5 transition-all"
+                    >
+                        Cancel
+                    </button>
+                    <button 
+                        type="submit" 
+                        class="flex-1 chelsea-btn-gold text-[#034694] font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all"
+                    >
+                        <span id="submitBtnText">Add Voice</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="fixed inset-0 z-50 hidden">
+        <div class="modal-overlay absolute inset-0" onclick="closeDeleteModal()"></div>
+        <div class="modal-content absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-white rounded-2xl shadow-2xl p-6">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Delete Voice?</h3>
+                <p id="deleteVoiceName" class="text-gray-500 mb-6">Are you sure you want to delete this voice?</p>
+                <div class="flex gap-3">
+                    <button 
+                        onclick="closeDeleteModal()" 
+                        class="flex-1 px-6 py-3 border border-gray-200 text-gray-700 font-semibold rounded-xl hover:bg-gray-50 transition-all"
+                    >
+                        Cancel
+                    </button>
+                    <button 
+                        id="confirmDeleteBtn"
+                        class="flex-1 px-6 py-3 bg-red-500 text-white font-semibold rounded-xl hover:bg-red-600 transition-all"
+                    >
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 hidden">
+        <div class="bg-[#034694] text-white px-6 py-4 rounded-xl shadow-lg flex items-center gap-3">
+            <svg id="toastIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span id="toastMessage">Action completed successfully</span>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="chelsea-header text-center py-8 mt-8 text-sm relative overflow-hidden">
+        <!-- Chelsea Lion Watermark -->
+        <div class="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
+            <svg class="w-48 h-48" viewBox="0 0 100 100" fill="currentColor">
+                <circle cx="50" cy="50" r="45" stroke="#DBA111" stroke-width="3" fill="none"/>
+                <text x="50" y="55" text-anchor="middle" font-size="24" font-weight="bold" fill="#DBA111">CFC</text>
+            </svg>
+        </div>
+        <div class="relative z-10">
+            <p class="text-white/90 font-medium">MySpeech Admin Dashboard</p>
+            <p class="text-[#DBA111] mt-2 font-bold text-lg">Keep The Blue Flag Flying High! 🦁💙</p>
+            <p class="text-white/60 mt-2 text-xs">Powered by 127+ Open Source TTS Voices</p>
+            <div class="flex justify-center gap-4 mt-3">
+                <span class="px-2 py-1 bg-[#DBA111]/20 rounded text-[#DBA111] text-xs">Coqui</span>
+                <span class="px-2 py-1 bg-[#DBA111]/20 rounded text-[#DBA111] text-xs">Piper</span>
+                <span class="px-2 py-1 bg-[#DBA111]/20 rounded text-[#DBA111] text-xs">VITS</span>
+                <span class="px-2 py-1 bg-[#DBA111]/20 rounded text-[#DBA111] text-xs">Mimic3</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="admin.js"></script>
+</body>
+</html>
