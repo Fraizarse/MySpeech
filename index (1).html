@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySpeech - AI Text to Speech | 127+ Open Source Voices</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="public/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/public/logo-icon.svg">
+    <link rel="apple-touch-icon" href="/public/logo-icon.svg">
+    <!-- Wavesurfer.js for waveform visualization -->
+    <script src="https://unpkg.com/wavesurfer.js@7"></script>
+    <style>
+        :root {
+            --chelsea-blue: #034694;
+            --chelsea-dark: #001489;
+            --chelsea-gold: #DBA111;
+            --chelsea-gold-light: #F4C430;
+            --chelsea-white: #FFFFFF;
+        }
+        
+        /* Enhanced Chelsea Button Styles */
+        .chelsea-btn-gold {
+            background: linear-gradient(135deg, #DBA111 0%, #F4C430 100%);
+            box-shadow: 0 4px 15px rgba(219, 161, 17, 0.5), inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .chelsea-btn-gold:hover {
+            background: linear-gradient(135deg, #F4C430 0%, #DBA111 100%);
+            box-shadow: 0 6px 25px rgba(219, 161, 17, 0.6), inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px) scale(1.01);
+        }
+        
+        .chelsea-btn-blue {
+            background: linear-gradient(135deg, #034694 0%, #001489 100%);
+            box-shadow: 0 4px 15px rgba(3, 70, 148, 0.5), inset 0 2px 0 rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(219, 161, 17, 0.3);
+        }
+        
+        .chelsea-btn-blue:hover {
+            background: linear-gradient(135deg, #001489 0%, #034694 100%);
+            box-shadow: 0 6px 25px rgba(3, 70, 148, 0.6), inset 0 2px 0 rgba(255, 255, 255, 0.15);
+            border-color: #DBA111;
+            transform: translateY(-2px) scale(1.01);
+        }
+        
+        /* Chelsea Lion Badge Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(3, 70, 148, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(219, 161, 17, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        /* Gold accent line animation */
+        @keyframes goldShimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        .chelsea-header::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #034694, #DBA111, #F4C430, #DBA111, #034694);
+            background-size: 200% 100%;
+            animation: goldShimmer 3s linear infinite;
+        }
+        
+        /* Step number badges */
+        .step-badge {
+            background: linear-gradient(135deg, #034694, #001489);
+            border: 2px solid #DBA111;
+            box-shadow: 0 2px 8px rgba(219, 161, 17, 0.3);
+        }
+        
+        /* Card gold accent */
+        .chelsea-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chelsea-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #DBA111, transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .chelsea-card:hover::before {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-100 to-blue-50 min-h-screen font-['Inter']">
+    <!-- Header -->
+    <header class="chelsea-header backdrop-blur-md border-b border-[#001489] sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="/" class="flex items-center gap-3 hover:opacity-90 transition-opacity">
+                    <!-- Logo Icon -->
+                    <img src="/public/logo-icon.svg" alt="MySpeech Logo" class="w-12 h-12 drop-shadow-lg" onerror="this.style.display='none'">
+                    <div>
+                        <h1 class="text-xl font-bold text-white flex items-center gap-1">
+                            <span class="text-white">My</span><span class="text-[#DBA111]">Speech</span>
+                        </h1>
+                        <p class="text-xs text-[#DBA111]/80">AI Voice Synthesis</p>
+                    </div>
+                </a>
+                <div class="flex items-center gap-3">
+                    <div class="hidden sm:flex items-center gap-2 text-sm text-white/80">
+                        <span class="px-2 py-1 bg-[#DBA111]/20 rounded-full text-[#DBA111] text-xs font-medium">Coqui</span>
+                        <span class="px-2 py-1 bg-[#DBA111]/20 rounded-full text-[#DBA111] text-xs font-medium">Piper</span>
+                        <span class="px-2 py-1 bg-[#DBA111]/20 rounded-full text-[#DBA111] text-xs font-medium">VITS</span>
+                    </div>
+                    <a href="/admin" class="flex items-center gap-1 px-3 py-1.5 bg-white/10 hover:bg-white/20 rounded-lg text-white text-sm transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                        <span class="hidden md:inline">Admin</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-2xl mx-auto px-4 py-8 space-y-6">
+        
+        <!-- Hero Section -->
+        <div class="text-center mb-8">
+            <!-- Full Logo -->
+            <div class="flex justify-center mb-6">
+                <img src="/public/logo.svg" alt="MySpeech - AI Voice Synthesis" class="h-20 md:h-24 drop-shadow-lg" onerror="this.style.display='none'">
+            </div>
+            <h2 class="text-2xl md:text-3xl font-bold text-[#034694] mb-3">Transform Text into Speech</h2>
+            <p class="text-[#001489]/70 text-lg">127+ high-quality open-source voices in 40+ languages</p>
+            <div class="flex flex-wrap justify-center gap-2 mt-4">
+                <span class="text-xs px-3 py-1 bg-[#034694]/10 text-[#034694] rounded-full">🎤 Coqui TTS</span>
+                <span class="text-xs px-3 py-1 bg-[#034694]/10 text-[#034694] rounded-full">🔊 Piper</span>
+                <span class="text-xs px-3 py-1 bg-[#034694]/10 text-[#034694] rounded-full">🎵 VITS</span>
+                <span class="text-xs px-3 py-1 bg-[#034694]/10 text-[#034694] rounded-full">🎙️ Tacotron2</span>
+                <span class="text-xs px-3 py-1 bg-[#034694]/10 text-[#034694] rounded-full">✨ Glow-TTS</span>
+            </div>
+        </div>
+
+        <!-- Step 1: Enter Text -->
+        <div class="chelsea-card bg-white rounded-2xl shadow-sm border border-[#034694]/20 p-6 transition-all hover:shadow-lg hover:border-[#034694]/40">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-8 h-8 bg-[#034694] text-[#DBA111] rounded-full flex items-center justify-center font-semibold text-sm">1</div>
+                <h3 class="text-lg font-semibold text-[#034694]">Enter Your Text</h3>
+            </div>
+            <textarea 
+                id="textInput" 
+                placeholder="Type or paste the text you want to convert to speech..."
+                class="w-full h-40 p-4 border border-[#034694]/20 rounded-xl resize-none focus:ring-2 focus:ring-[#034694] focus:border-transparent outline-none transition-all text-gray-700 placeholder-gray-400"
+            ></textarea>
+            <div class="flex justify-between items-center mt-3">
+                <span id="charCount" class="text-sm text-gray-400">0 / 5000 characters</span>
+                <button id="clearText" class="text-sm text-gray-500 hover:text-gray-700 transition-colors">Clear</button>
+            </div>
+        </div>
+
+        <!-- Step 2: Choose Voice -->
+        <div class="chelsea-card bg-white rounded-2xl shadow-sm border border-[#034694]/20 p-6 transition-all hover:shadow-lg hover:border-[#034694]/40">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-8 h-8 bg-[#034694] text-[#DBA111] rounded-full flex items-center justify-center font-semibold text-sm">2</div>
+                <h3 class="text-lg font-semibold text-[#034694]">Choose a Voice</h3>
+                <span id="voiceCount" class="ml-auto text-sm text-white bg-gradient-to-r from-[#034694] to-[#001489] px-3 py-1 rounded-full font-medium shadow-sm">127 voices</span>
+            </div>
+            
+            <!-- Search and Filters -->
+            <div class="space-y-3 mb-4">
+                <!-- Search Bar -->
+                <div class="relative">
+                    <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#034694]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    <input 
+                        type="text" 
+                        id="voiceSearch" 
+                        placeholder="Search voices..."
+                        class="w-full pl-12 pr-4 py-3 border-2 border-[#034694]/20 rounded-xl focus:ring-2 focus:ring-[#DBA111] focus:border-[#034694] outline-none transition-all bg-gradient-to-r from-white to-blue-50/30"
+                    >
+                </div>
+                
+                <!-- Filter Row -->
+                <div class="flex flex-wrap gap-2">
+                    <!-- Language Filter -->
+                    <select id="languageFilter" class="flex-1 min-w-[140px] px-4 py-2.5 border-2 border-[#034694]/20 rounded-xl text-sm focus:ring-2 focus:ring-[#DBA111] focus:border-[#034694] outline-none bg-white font-medium text-[#034694] cursor-pointer hover:border-[#034694]/40 transition-all">
+                        <option value="">🌍 All Languages</option>
+                    </select>
+                    
+                    <!-- Engine Filter -->
+                    <select id="engineFilter" class="flex-1 min-w-[140px] px-4 py-2.5 border-2 border-[#034694]/20 rounded-xl text-sm focus:ring-2 focus:ring-[#DBA111] focus:border-[#034694] outline-none bg-white font-medium text-[#034694] cursor-pointer hover:border-[#034694]/40 transition-all">
+                        <option value="">⚙️ All Engines</option>
+                    </select>
+                    
+                    <!-- Gender Filter -->
+                    <select id="genderFilter" class="flex-1 min-w-[120px] px-4 py-2.5 border-2 border-[#034694]/20 rounded-xl text-sm focus:ring-2 focus:ring-[#DBA111] focus:border-[#034694] outline-none bg-white font-medium text-[#034694] cursor-pointer hover:border-[#034694]/40 transition-all">
+                        <option value="">👤 All</option>
+                        <option value="female">👩 Female</option>
+                        <option value="male">👨 Male</option>
+                        <option value="neutral">🎭 Neutral</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Voice List Container -->
+            <div id="voiceListContainer" class="max-h-96 overflow-y-auto border-2 border-[#034694]/15 rounded-2xl bg-gradient-to-b from-blue-50/30 to-white shadow-inner">
+                <div id="voiceList" class="divide-y divide-[#034694]/10">
+                    <!-- Voices will be loaded dynamically -->
+                    <div class="p-8 text-center text-gray-400">
+                        <div class="loading-spinner mx-auto mb-3"></div>
+                        <p>Loading voices...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Selected Voice Display -->
+            <div id="selectedVoiceDisplay" class="mt-4 p-4 bg-gradient-to-r from-[#034694] to-[#001489] rounded-xl hidden shadow-lg">
+                <div class="flex items-center gap-4">
+                    <div id="selectedVoiceAvatar" class="w-14 h-14 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-md border-2 border-[#DBA111]/50"></div>
+                    <div class="flex-1">
+                        <p id="selectedVoiceName" class="font-bold text-white text-lg"></p>
+                        <p id="selectedVoiceDetails" class="text-sm text-white/70"></p>
+                    </div>
+                    <div class="flex flex-col items-end gap-1">
+                        <span id="selectedVoiceEngine" class="text-xs px-3 py-1 bg-[#DBA111] text-[#001489] rounded-full font-bold uppercase shadow-sm"></span>
+                        <span class="text-xs text-[#DBA111]">✓ Selected</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Generate Audio -->
+        <div class="chelsea-card bg-white rounded-2xl shadow-sm border border-[#034694]/20 p-6 transition-all hover:shadow-lg hover:border-[#034694]/40">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-8 h-8 bg-[#034694] text-[#DBA111] rounded-full flex items-center justify-center font-semibold text-sm">3</div>
+                <h3 class="text-lg font-semibold text-[#034694]">Generate Audio</h3>
+            </div>
+            <button 
+                id="generateBtn" 
+                class="w-full py-4 chelsea-btn-gold text-[#034694] font-semibold rounded-xl transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg flex items-center justify-center gap-2"
+            >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <span id="generateBtnText">Generate Speech</span>
+            </button>
+            
+            <!-- Loading State -->
+            <div id="loadingState" class="hidden mt-4">
+                <div class="flex items-center justify-center gap-3 py-4">
+                    <div class="loading-spinner"></div>
+                    <span class="text-[#034694]">Generating your audio...</span>
+                </div>
+                <div class="w-full bg-[#034694]/20 rounded-full h-2 overflow-hidden">
+                    <div id="progressBar" class="h-full chelsea-progress rounded-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Error State -->
+            <div id="errorState" class="hidden mt-4 p-4 bg-red-50 border border-red-200 rounded-xl">
+                <div class="flex items-center gap-2 text-red-600">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span id="errorMessage" class="font-medium">An error occurred</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4 & 5: Audio Player & Download -->
+        <div id="audioSection" class="chelsea-card bg-white rounded-2xl shadow-sm border border-[#DBA111] p-6 hidden transition-all">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-8 h-8 bg-[#DBA111] text-[#034694] rounded-full flex items-center justify-center">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-[#034694]">Your Audio is Ready!</h3>
+            </div>
+
+            <!-- Generated Voice Info -->
+            <div id="generatedVoiceInfo" class="mb-4 p-3 bg-[#034694]/5 rounded-xl">
+                <div class="flex items-center gap-2 text-sm text-[#034694]/80">
+                    <span id="genVoiceName" class="font-medium"></span>
+                    <span>•</span>
+                    <span id="genVoiceLang"></span>
+                    <span>•</span>
+                    <span id="genVoiceEngine" class="px-2 py-0.5 bg-[#DBA111]/20 rounded text-xs"></span>
+                </div>
+            </div>
+
+            <!-- Custom Audio Player with Wavesurfer.js -->
+            <div class="bg-[#034694]/5 rounded-xl p-4 mb-4">
+                <div class="flex items-center gap-4">
+                    <button id="playPauseBtn" class="w-14 h-14 chelsea-btn-blue rounded-full flex items-center justify-center text-white shadow-lg hover:scale-105 transition-transform shrink-0">
+                        <svg id="playIcon" class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                        <svg id="pauseIcon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                        </svg>
+                    </button>
+                    <div class="flex-1 min-w-0">
+                        <!-- Wavesurfer Container -->
+                        <div id="waveformContainer" class="mb-2 rounded-lg overflow-hidden" style="height: 60px;">
+                            <div id="waveform"></div>
+                        </div>
+                        <div class="flex justify-between text-sm text-[#034694]/70">
+                            <span id="currentTime">0:00</span>
+                            <span id="duration">0:00</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Playback Speed & Volume -->
+                <div class="flex items-center justify-between mt-4 pt-4 border-t border-[#034694]/10">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs text-[#034694]/60">Speed:</span>
+                        <select id="playbackSpeed" class="text-sm px-2 py-1 border border-[#034694]/20 rounded-lg bg-white focus:outline-none">
+                            <option value="0.5">0.5x</option>
+                            <option value="0.75">0.75x</option>
+                            <option value="1" selected>1x</option>
+                            <option value="1.25">1.25x</option>
+                            <option value="1.5">1.5x</option>
+                            <option value="2">2x</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-[#034694]/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>
+                        </svg>
+                        <input 
+                            type="range" 
+                            id="volumeSlider" 
+                            min="0" 
+                            max="1" 
+                            step="0.1" 
+                            value="1" 
+                            class="w-20 h-1 accent-[#034694] cursor-pointer"
+                        >
+                    </div>
+                </div>
+                <audio id="audioPlayer" class="hidden"></audio>
+            </div>
+
+            <!-- Download Button -->
+            <a 
+                id="downloadBtn" 
+                href="#" 
+                download="myspeech_audio.wav"
+                class="w-full py-4 chelsea-btn-blue text-white font-semibold rounded-xl transition-all flex items-center justify-center gap-2 block"
+            >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                </svg>
+                Download Audio
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="chelsea-footer text-center py-6">
+        <p class="text-white font-medium">© 2024 MySpeech. Built with 💙</p>
+    </footer>
+
+    <script src="public/script.js"></script>
+</body>
+</html>
