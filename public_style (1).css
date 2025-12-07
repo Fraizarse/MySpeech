@@ -1,0 +1,352 @@
+/**
+ * MySpeech - Custom Styles
+ * Chelsea FC Color Palette Theme
+ * Primary Blue: #034694 | Dark Blue: #001489 | Gold: #DBA111
+ */
+
+/* ===== CSS Variables ===== */
+:root {
+    --chelsea-blue: #034694;
+    --chelsea-dark: #001489;
+    --chelsea-gold: #DBA111;
+    --chelsea-gold-light: #F4C430;
+    --chelsea-white: #FFFFFF;
+}
+
+/* ===== Base Styles ===== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: linear-gradient(135deg, #f0f4f8 0%, #e6f0ff 50%, #f0f4f8 100%);
+}
+
+/* ===== Chelsea Header ===== */
+.chelsea-header {
+    background: linear-gradient(135deg, var(--chelsea-blue) 0%, var(--chelsea-dark) 100%);
+    border-bottom: 3px solid var(--chelsea-gold);
+}
+
+.chelsea-logo-bg {
+    background: linear-gradient(135deg, var(--chelsea-dark) 0%, var(--chelsea-blue) 100%);
+    border: 2px solid var(--chelsea-gold);
+    box-shadow: 0 0 15px rgba(219, 161, 17, 0.4);
+}
+
+/* ===== Chelsea Footer ===== */
+.chelsea-footer {
+    background: linear-gradient(135deg, var(--chelsea-blue) 0%, var(--chelsea-dark) 100%);
+    margin-top: 2rem;
+    border-top: 3px solid var(--chelsea-gold);
+}
+
+/* ===== Chelsea Buttons - Gold (Primary Action) ===== */
+.chelsea-btn-gold {
+    background: linear-gradient(135deg, var(--chelsea-gold) 0%, var(--chelsea-gold-light) 100%);
+    box-shadow: 0 4px 15px rgba(219, 161, 17, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    border: 2px solid transparent;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chelsea-btn-gold:hover {
+    background: linear-gradient(135deg, var(--chelsea-gold-light) 0%, var(--chelsea-gold) 100%);
+    box-shadow: 0 6px 25px rgba(219, 161, 17, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.chelsea-btn-gold:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(219, 161, 17, 0.4);
+}
+
+/* ===== Chelsea Buttons - Blue (Secondary Action) ===== */
+.chelsea-btn-blue {
+    background: linear-gradient(135deg, var(--chelsea-blue) 0%, var(--chelsea-dark) 100%);
+    box-shadow: 0 4px 15px rgba(3, 70, 148, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border: 2px solid transparent;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chelsea-btn-blue:hover {
+    background: linear-gradient(135deg, var(--chelsea-dark) 0%, var(--chelsea-blue) 100%);
+    box-shadow: 0 6px 25px rgba(3, 70, 148, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border-color: var(--chelsea-gold);
+    transform: translateY(-2px);
+}
+
+.chelsea-btn-blue:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(3, 70, 148, 0.4);
+}
+
+/* ===== Chelsea Outline Button ===== */
+.chelsea-btn-outline {
+    background: transparent;
+    border: 2px solid var(--chelsea-blue);
+    color: var(--chelsea-blue);
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chelsea-btn-outline:hover {
+    background: var(--chelsea-blue);
+    color: white;
+    border-color: var(--chelsea-gold);
+    box-shadow: 0 4px 15px rgba(3, 70, 148, 0.4);
+}
+
+/* ===== Chelsea Gold Outline Button ===== */
+.chelsea-btn-gold-outline {
+    background: transparent;
+    border: 2px solid var(--chelsea-gold);
+    color: var(--chelsea-gold);
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chelsea-btn-gold-outline:hover {
+    background: var(--chelsea-gold);
+    color: var(--chelsea-dark);
+    box-shadow: 0 4px 15px rgba(219, 161, 17, 0.4);
+}
+
+/* ===== Chelsea Progress Bar ===== */
+.chelsea-progress {
+    background: linear-gradient(90deg, var(--chelsea-blue), var(--chelsea-gold), var(--chelsea-blue));
+    background-size: 200% 100%;
+    animation: chelsea-shimmer 2s infinite;
+}
+
+@keyframes chelsea-shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* ===== Voice Selection Cards ===== */
+.voice-option {
+    padding: 1rem;
+    border: 2px solid rgba(3, 70, 148, 0.2);
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: white;
+}
+
+.voice-option:hover {
+    border-color: var(--chelsea-blue);
+    background-color: rgba(3, 70, 148, 0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(3, 70, 148, 0.15);
+}
+
+.voice-option.selected {
+    border-color: var(--chelsea-gold);
+    background: linear-gradient(135deg, rgba(219, 161, 17, 0.1) 0%, rgba(3, 70, 148, 0.05) 100%);
+    box-shadow: 0 0 0 3px rgba(219, 161, 17, 0.2);
+}
+
+.voice-option.selected::after {
+    content: '';
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    background: linear-gradient(135deg, var(--chelsea-gold), var(--chelsea-gold-light));
+    border-radius: 50%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23034694' viewBox='0 0 24 24'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E");
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.voice-option {
+    position: relative;
+}
+
+/* ===== Loading Spinner - Chelsea Colors ===== */
+.loading-spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(3, 70, 148, 0.2);
+    border-top-color: var(--chelsea-gold);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ===== Waveform Animation - Chelsea Colors ===== */
+.waveform-bar {
+    width: 3px;
+    background: linear-gradient(to top, var(--chelsea-blue), var(--chelsea-gold));
+    border-radius: 3px;
+    transition: height 0.1s ease;
+}
+
+.waveform-bar.inactive {
+    background: rgba(3, 70, 148, 0.3);
+}
+
+/* ===== Button States ===== */
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* ===== Textarea Focus - Chelsea Colors ===== */
+textarea:focus {
+    box-shadow: 0 0 0 3px rgba(3, 70, 148, 0.15);
+}
+
+/* ===== Smooth Transitions ===== */
+.fade-in {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== Audio Player Waveform ===== */
+#waveform {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2px;
+    padding: 0 4px;
+}
+
+/* ===== Responsive Adjustments ===== */
+@media (max-width: 640px) {
+    .voice-option {
+        padding: 0.875rem;
+    }
+    
+    .voice-option .w-10 {
+        width: 2.25rem;
+        height: 2.25rem;
+    }
+}
+
+/* ===== Custom Scrollbar - Chelsea Colors ===== */
+textarea::-webkit-scrollbar {
+    width: 8px;
+}
+
+textarea::-webkit-scrollbar-track {
+    background: rgba(3, 70, 148, 0.1);
+    border-radius: 4px;
+}
+
+textarea::-webkit-scrollbar-thumb {
+    background: var(--chelsea-blue);
+    border-radius: 4px;
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+    background: var(--chelsea-dark);
+}
+
+/* ===== Pulse Animation for Generate Button ===== */
+@keyframes chelsea-pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(219, 161, 17, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 0 15px rgba(219, 161, 17, 0);
+    }
+}
+
+#generateBtn:not(:disabled):hover {
+    animation: chelsea-pulse 1.5s infinite;
+}
+
+/* ===== Success State ===== */
+.success-bounce {
+    animation: successBounce 0.5s ease;
+}
+
+@keyframes successBounce {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+/* ===== Chelsea Card Hover Effect ===== */
+.chelsea-card {
+    transition: all 0.3s ease;
+}
+
+.chelsea-card:hover {
+    box-shadow: 0 8px 30px rgba(3, 70, 148, 0.12);
+}
+
+/* ===== Voice Avatar Colors - Chelsea Themed ===== */
+.voice-option[data-voice="emma"] .w-10 {
+    background: linear-gradient(135deg, var(--chelsea-gold), var(--chelsea-gold-light)) !important;
+}
+
+.voice-option[data-voice="james"] .w-10 {
+    background: linear-gradient(135deg, var(--chelsea-blue), var(--chelsea-dark)) !important;
+}
+
+.voice-option[data-voice="sophia"] .w-10 {
+    background: linear-gradient(135deg, #034694, #1e6fd9) !important;
+}
+
+.voice-option[data-voice="michael"] .w-10 {
+    background: linear-gradient(135deg, var(--chelsea-dark), #002d7a) !important;
+}
+
+/* ===== Lion Icon Decoration (Chelsea Mascot) ===== */
+.chelsea-header::before {
+    content: '';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    opacity: 0.1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23DBA111'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* ===== Gold Accent Border ===== */
+.chelsea-gold-border {
+    border: 2px solid var(--chelsea-gold);
+}
+
+/* ===== Blue Gradient Text ===== */
+.chelsea-text-gradient {
+    background: linear-gradient(135deg, var(--chelsea-blue), var(--chelsea-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
